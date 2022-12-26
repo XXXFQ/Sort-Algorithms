@@ -6,6 +6,7 @@ namespace Process
     void ShowArray(int *, int);
     void ShowArray(int *, int, int);
     void Swap(int *, int *);
+    void ShowSwapCount(int);
 }
 
 #endif

@@ -17,7 +17,7 @@ namespace SortAlgorithms
             }
             Process::ShowArray(value, length);
         }
-        std::cout << swapCount << " swap times." << std::endl;
+        Process::ShowSwapCount(swapCount);
     }
 
     // バブルソート(オーダー = O(N^2))
@@ -39,7 +39,7 @@ namespace SortAlgorithms
             if (!swapped) { break; }
             Process::ShowArray(value, length);
         }
-        std::cout << swapCount << " swap times." << std::endl;
+        Process::ShowSwapCount(swapCount);
     }
 
     // 挿入ソート(オーダー = O(N^2))
@@ -61,7 +61,7 @@ namespace SortAlgorithms
             }
             Process::ShowArray(value, length);
         }
-        std::cout << swapCount << " swap times." << std::endl;
+        Process::ShowSwapCount(swapCount);
     }
 
     // シェルソート(オーダー = O(N^2))
@@ -100,7 +100,7 @@ namespace SortAlgorithms
             // 間隔hを狭める
             h /= 3;
         } while (h > 0);
-        std::cout << swapCount << " swap times." << std::endl;
+        Process::ShowSwapCount(swapCount);
     }
 
     // シェーカーソート
@@ -139,6 +139,6 @@ namespace SortAlgorithms
             topIndex++;
             endIndex--;
         } while (topIndex < endIndex && swapped);
-        std::cout << swapCount << " swap times." << std::endl;
+        Process::ShowSwapCount(swapCount);
     }
 }

@@ -28,4 +28,10 @@ namespace Process
         *x = *y;
         *y = swap;
     }
+
+    // スワップされた回数を表示
+    void ShowSwapCount(int swapCount)
+    {
+        std::cout << swapCount << " swap times." << std::endl;
+    }
 }
