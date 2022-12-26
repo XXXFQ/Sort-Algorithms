@@ -2,10 +2,16 @@
 
 namespace SortAlgorithms
 {
+    int swapCount, arraySize;
+
     void QuickSort(int *value, int leftIndex, int rightIndex)
     {
-        int i, j, pivot;
-        int tempIndex[] = { leftIndex, rightIndex / 2, rightIndex };
+        int left = leftIndex + 1;
+        int right = rightIndex;
+        int pivot = leftIndex;
+        int tempIndex[] = {
+            leftIndex, (rightIndex + leftIndex) / 2, rightIndex
+        };
 
         // 分割されたデータ列の値が1個の場合、それを返す。
         if (leftIndex >= rightIndex) { return; }
@@ -15,6 +21,7 @@ namespace SortAlgorithms
             for (int j = i - 1; j >= 0; j--) {
                 if (value[tempIndex[j]] > value[tempIndex[j + 1]]) {
                     Process::Swap(&tempIndex[j], &tempIndex[j + 1]);
+                    swapCount++;
                 }
             }
         }
@@ -22,39 +29,41 @@ namespace SortAlgorithms
         // 中央値をデータ列の一番左に移動し、その値をpivotとする
         if (value[tempIndex[1]] != value[leftIndex]) {
             Process::Swap(&value[tempIndex[1]], &value[leftIndex]);
+            swapCount++;
         }
-        pivot = leftIndex;
 
         // 並び替え処理
-        i = leftIndex + 1;
-        j = rightIndex;
-        while (i < j) {
-            // 右から探索し、pivotよりも大きい値を見つけ、ループを抜ける。
-            while (value[i] < value[pivot]) {
-                i++;
-            }
+        do {
+            // 右から探索し、pivotよりも大きい値を見つける
+            while (left <= right && left < arraySize) {
+        		if (value[left] > value[pivot]) { break; }
+        		left++;
+        	}
 
-            // 左から探索し、pivotよりも小さい値を見つけ、ループを抜ける。
-            while (value[pivot] < value[j]) {
-                j--;
-            }
+            // 左から探索し、pivot以下の値を見つける
+            while (left <= right && right >= 0) {
+        		if (value[pivot] >= value[right]) { break; }
+        		right--;
+        	}
 
             // 見つけた値同士で交換する。
-            if (i < j) {
-                Process::Swap(&value[i], &value[j]);
+            if (left < right) {
+                Process::Swap(&value[left], &value[right]);
+                swapCount++;
             }
-        }
+        } while (left < right);
 
         // pivotを列の中央に移動する
-        if (value[j] < value[pivot]) {
-            Process::Swap(&value[j], &value[pivot]);
+        if (value[right] < value[pivot]) {
+            Process::Swap(&value[right], &value[pivot]);
+            swapCount++;
         }
 
         // pivotより小さい数字を集めた範囲でソート
-        QuickSort(value, leftIndex, j - 1);
+        QuickSort(value, leftIndex, right - 1);
 
         // pivotより大きい数字を集めた範囲でソート
-        QuickSort(value, i, rightIndex);
+        QuickSort(value, left, rightIndex);
 
         // 結果表示
         Process::ShowArray(value, leftIndex, rightIndex + 1);
@@ -63,7 +72,10 @@ namespace SortAlgorithms
     // クイックソート(オーダー = O(NlogN))
     void QuickSort(int *value, int length)
     {
+        swapCount = 0;
+        arraySize = length;
         std::cout << "Run Quick Sort" << std::endl;
         QuickSort(value, 0, length - 1);
+        Process::ShowSwapCount(swapCount);
     }
 }
