@@ -1,4 +1,5 @@
-#include "Sort.hpp"
+#include <memory>
+#include "SortAlgorithms/Sort.hpp"
 
 namespace SortAlgorithms
 {
@@ -44,11 +45,11 @@ namespace SortAlgorithms
         delete temp;
 
         // 結果表示
-        Process::ShowArray(value, length);
+        Show::Array(value, length);
     }
 
     // マージソート(オーダー = O(NlogN))
-    void MergeSort(int *value, int length)
+    void Sort::MergeSort(int *value, int length)
     {
         std::cout << "Run Merge Sort" << std::endl;
         Merge(value, length);

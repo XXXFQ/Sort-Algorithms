@@ -1,9 +1,9 @@
-#include "Sort.hpp"
+#include "SortAlgorithms/Sort.hpp"
 
 namespace SortAlgorithms
 {
     // 選択ソート(オーダー = O(N^2))
-    void SelectionSort(int *value, int length)
+    void Sort::SelectionSort(int *value, int length)
     {
         int swapCount = 0;
 
@@ -11,17 +11,17 @@ namespace SortAlgorithms
         for (int i = 0; i < length - 1; i++) {
             for (int j = i + 1; j < length; j++) {
                 if (value[i] > value[j]) {
-                    Process::Swap(&value[i], &value[j]);
+                    Utils::Swap(&value[i], &value[j]);
                     swapCount++;
                 }
             }
-            Process::ShowArray(value, length);
+            Show::Array(value, length);
         }
-        Process::ShowSwapCount(swapCount);
+        Show::SwapCount(swapCount);
     }
 
     // バブルソート(オーダー = O(N^2))
-    void BubbleSort(int *value, int length)
+    void Sort::BubbleSort(int *value, int length)
     {
         bool swapped;
         int swapCount = 0;
@@ -31,19 +31,19 @@ namespace SortAlgorithms
             swapped = false;
             for (int i = 0; i < endIndex; i++) {
                 if (value[i] > value[i + 1]) {
-                    Process::Swap(&value[i], &value[i + 1]);
+                    Utils::Swap(&value[i], &value[i + 1]);
                     swapCount++;
                     swapped = true;
                 }
             }
             if (!swapped) { break; }
-            Process::ShowArray(value, length);
+            Show::Array(value, length);
         }
-        Process::ShowSwapCount(swapCount);
+        Show::SwapCount(swapCount);
     }
 
     // 挿入ソート(オーダー = O(N^2))
-    void InsertionsSort(int *value, int length)
+    void Sort::InsertionsSort(int *value, int length)
     {
         bool swapped;
         int swapCount = 0;
@@ -53,19 +53,19 @@ namespace SortAlgorithms
             for (int j = i - 1; j >= 0; j--) {
                 swapped = false;
                 if (value[j] > value[j + 1]) {
-                    Process::Swap(&value[j], &value[j + 1]);
+                    Utils::Swap(&value[j], &value[j + 1]);
                     swapCount++;
                     swapped = true;
                 }
                 if (!swapped) { break; }
             }
-            Process::ShowArray(value, length);
+            Show::Array(value, length);
         }
-        Process::ShowSwapCount(swapCount);
+        Show::SwapCount(swapCount);
     }
 
     // シェルソート(オーダー = O(N^2))
-    void ShellSort(int *value, int length)
+    void Sort::ShellSort(int *value, int length)
     {
         bool swapped;
         int h, groupNumber, swapCount = 0;
@@ -82,7 +82,7 @@ namespace SortAlgorithms
                 swapped = false;
                 for (int j = i, groupNumber = 1; j >= 0; j--, groupNumber++) {
                     if (value[j] > value[j + h]) {
-                        Process::Swap(&value[j], &value[j + h]);
+                        Utils::Swap(&value[j], &value[j + h]);
                         swapCount++;
                         swapped = true;
                     }
@@ -94,17 +94,17 @@ namespace SortAlgorithms
                         swapped = false;
                     }
                 }
-                Process::ShowArray(value, length);
+                Show::Array(value, length);
             }
 
             // 間隔hを狭める
             h /= 3;
         } while (h > 0);
-        Process::ShowSwapCount(swapCount);
+        Show::SwapCount(swapCount);
     }
 
     // シェーカーソート
-    void ShakerSort(int *value, int length)
+    void Sort::ShakerSort(int *value, int length)
     {
         int topIndex = 0;
         int endIndex = length - 1;
@@ -118,7 +118,7 @@ namespace SortAlgorithms
             // 順方向のスキャン
             for (int i = topIndex; i < endIndex; i++) {
                 if (value[i] > value[i + 1]) {
-                    Process::Swap(&value[i], &value[i + 1]);
+                    Utils::Swap(&value[i], &value[i + 1]);
                     swapCount++;
                     swapped = true;
                 }
@@ -127,18 +127,18 @@ namespace SortAlgorithms
             // 逆方向のスキャン
             for (int i = endIndex - 2; i >= topIndex; i--) {
                 if (value[i] > value[i + 1]) {
-                    Process::Swap(&value[i], &value[i + 1]);
+                    Utils::Swap(&value[i], &value[i + 1]);
                     swapCount++;
                     swapped = true;
                 }
             }
             if (swapped)
-                Process::ShowArray(value, length);
+                Show::Array(value, length);
 
             // スキャン範囲を狭める
             topIndex++;
             endIndex--;
         } while (topIndex < endIndex && swapped);
-        Process::ShowSwapCount(swapCount);
+        Show::SwapCount(swapCount);
     }
 }

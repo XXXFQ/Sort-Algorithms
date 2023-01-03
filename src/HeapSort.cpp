@@ -1,4 +1,4 @@
-#include "Sort.hpp"
+#include "SortAlgorithms/Sort.hpp"
 
 #define LEFT_CHILD(i)  ((i + 1) * 2 - 1)
 #define RIGHT_CHILD(i) ((i + 1) * 2)
@@ -14,13 +14,13 @@ namespace SortAlgorithms
 
         // 親より左の子の方が大きい場合入れ替える。
         if (heap[leftChild] < heap[parent]) {
-            Process::Swap(&heap[leftChild], &heap[parent]);
+            Utils::Swap(&heap[leftChild], &heap[parent]);
             UpHeap(heap, leftChild, length);
         }
 
         // 親より右の子の方が大きい場合入れ替える。
         if (heap[rightChild] < heap[parent] && rightChild < length) {
-            Process::Swap(&heap[rightChild], &heap[parent]);
+            Utils::Swap(&heap[rightChild], &heap[parent]);
             UpHeap(heap, rightChild, length);
         }
     }
@@ -34,24 +34,24 @@ namespace SortAlgorithms
 
         // ルートを木の末端の要素と入れ替える
         if (parent == 0) {
-            Process::Swap(&heap[length], &heap[0]);
+            Utils::Swap(&heap[length], &heap[0]);
         }
 
         // 親より右の子の方が大きい場合入れ替える。
         if (heap[rightChild] < heap[parent] && rightChild < length) {
-            Process::Swap(&heap[rightChild], &heap[parent]);
+            Utils::Swap(&heap[rightChild], &heap[parent]);
             downHeap(heap, rightChild, length);
         }
 
         // 親より左の子の方が大きい場合入れ替える。
         if (heap[leftChild] < heap[parent]) {
-            Process::Swap(&heap[leftChild], &heap[parent]);
+            Utils::Swap(&heap[leftChild], &heap[parent]);
             downHeap(heap, leftChild, length);
         }
     }
 
     // ヒープソート(オーダー = O(NlogN))
-    void HeapSort(int *value, int length)
+    void Sort::HeapSort(int *value, int length)
     {
         int *heap, parent = length / 2 - 1;
         int heapLength = length;
@@ -77,7 +77,7 @@ namespace SortAlgorithms
             UpHeap(heap, parent, heapLength);
         }
         value[0] = heap[0];
-        Process::ShowArray(heap, heapLength);
+        Show::Array(heap, heapLength);
 
         // ヒープからルートの削除
         for (int i = 1; i < length; i++) {
@@ -88,10 +88,10 @@ namespace SortAlgorithms
             value[i] = heap[0];
 
             // 結果表示
-            Process::ShowArray(heap, heapLength);
+            Show::Array(heap, heapLength);
         }
         value[length - 1] = heap[1];
-        Process::ShowArray(value, length);
+        Show::Array(value, length);
         delete heap;
     }
 }

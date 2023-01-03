@@ -1,58 +1,50 @@
-#include "Sort.hpp"
+#include "SortAlgorithms.hpp"
 
 int main(void)
 {
     using namespace SortAlgorithms;
-    /*
-    std::vector<int> data = {
-        44, 100, 5, 31, 200, 4, 2, 10, 6, 7, 66, 74, 20,
-        56, 89, 1, 77, 204, 53, 102, 54, 3, 76, 8
-    };
-    int dataSize = data.size();
-    */
+    int data[54], mode;
+    const int dataSize = sizeof(data) / sizeof(int);
 
-   int data[54];
-   const int dataSize = sizeof(data) / sizeof(int);
-   for (int i = 0; i < dataSize; i++)
-        data[i] = 54 - i;
-
-    int mode;
-
+    //  整列用の乱数を生成する
+    for (int i = 0; i != dataSize; ++i)
+        data[i] = Utils::Random(0, dataSize);
+    
     std::cout << "Sort mode? ";
     std::cin >> mode;
 
     switch (mode) {
         case 0:
             // 選択ソート
-            SelectionSort(data, dataSize);
+            Sort::SelectionSort(data, dataSize);
             break;
         case 1:
             // バブルソート
-            BubbleSort(data, dataSize);
+            Sort::BubbleSort(data, dataSize);
             break;
         case 2:
             // 挿入ソート
-            InsertionsSort(data, dataSize);
+            Sort::InsertionsSort(data, dataSize);
             break;
         case 3:
             // シェルソート
-            ShellSort(data, dataSize);
+            Sort::ShellSort(data, dataSize);
             break;
         case 4:
             // マージソート
-            MergeSort(data, dataSize);
+            Sort::MergeSort(data, dataSize);
             break;
         case 5:
             // クイックソート
-            QuickSort(data, dataSize);
+            Sort::QuickSort(data, dataSize);
             break;
         case 6:
             // ヒープソート
-            HeapSort(data, dataSize);
+            Sort::HeapSort(data, dataSize);
             break;
         case 7:
             // シェーカーソート
-            ShakerSort(data, dataSize);
+            Sort::ShakerSort(data, dataSize);
     }
     system("PAUSE");
     return 0;

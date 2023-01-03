@@ -1,10 +1,10 @@
-#include "Sort.hpp"
+#include "SortAlgorithms/Sort.hpp"
 
 namespace SortAlgorithms
 {
     int swapCount, arraySize;
 
-    void QuickSort(int *value, int leftIndex, int rightIndex)
+    void Quick(int *value, int leftIndex, int rightIndex)
     {
         int left = leftIndex + 1;
         int right = rightIndex;
@@ -20,7 +20,7 @@ namespace SortAlgorithms
         for (int i = 1; i < 3; i++) {
             for (int j = i - 1; j >= 0; j--) {
                 if (value[tempIndex[j]] > value[tempIndex[j + 1]]) {
-                    Process::Swap(&tempIndex[j], &tempIndex[j + 1]);
+                    Utils::Swap(&tempIndex[j], &tempIndex[j + 1]);
                     swapCount++;
                 }
             }
@@ -28,7 +28,7 @@ namespace SortAlgorithms
 
         // 中央値をデータ列の一番左に移動し、その値をpivotとする
         if (value[tempIndex[1]] != value[leftIndex]) {
-            Process::Swap(&value[tempIndex[1]], &value[leftIndex]);
+            Utils::Swap(&value[tempIndex[1]], &value[leftIndex]);
             swapCount++;
         }
 
@@ -48,34 +48,34 @@ namespace SortAlgorithms
 
             // 見つけた値同士で交換する。
             if (left < right) {
-                Process::Swap(&value[left], &value[right]);
+                Utils::Swap(&value[left], &value[right]);
                 swapCount++;
             }
         } while (left < right);
 
         // pivotを列の中央に移動する
         if (value[right] < value[pivot]) {
-            Process::Swap(&value[right], &value[pivot]);
+            Utils::Swap(&value[right], &value[pivot]);
             swapCount++;
         }
 
         // pivotより小さい数字を集めた範囲でソート
-        QuickSort(value, leftIndex, right - 1);
+        Quick(value, leftIndex, right - 1);
 
         // pivotより大きい数字を集めた範囲でソート
-        QuickSort(value, left, rightIndex);
+        Quick(value, left, rightIndex);
 
         // 結果表示
-        Process::ShowArray(value, leftIndex, rightIndex + 1);
+        Show::Array(value, leftIndex, rightIndex + 1);
     }
 
     // クイックソート(オーダー = O(NlogN))
-    void QuickSort(int *value, int length)
+    void Sort::QuickSort(int *value, int length)
     {
         swapCount = 0;
         arraySize = length;
         std::cout << "Run Quick Sort" << std::endl;
-        QuickSort(value, 0, length - 1);
-        Process::ShowSwapCount(swapCount);
+        Quick(value, 0, length - 1);
+        Show::SwapCount(swapCount);
     }
 }
