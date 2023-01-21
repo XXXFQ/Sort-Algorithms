@@ -2,34 +2,42 @@
 
 namespace SortAlgorithms
 {
-    int swapCount, arraySize;
+    int arraySize;
 
-    void Quick(int *value, int leftIndex, int rightIndex)
+    // データ列の先頭/中央/末尾の3つの値の中央値を求める
+    int med3(int *value, int low, int high)
     {
-        int left = leftIndex + 1;
-        int right = rightIndex;
-        int pivot = leftIndex;
-        int tempIndex[] = {
-            leftIndex, (rightIndex + leftIndex) / 2, rightIndex
+        bool swapped;
+        int temp[] = {
+            low, (low + high) / 2, high
         };
 
-        // 分割されたデータ列の値が1個の場合、それを返す。
-        if (leftIndex >= rightIndex) { return; }
-        
-        // データ列[value]の先頭/中央/末尾の3つの値の中央値を基準値とする
         for (int i = 1; i < 3; i++) {
             for (int j = i - 1; j >= 0; j--) {
-                if (value[tempIndex[j]] > value[tempIndex[j + 1]]) {
-                    Utils::Swap(&tempIndex[j], &tempIndex[j + 1]);
-                    swapCount++;
+                swapped = false;
+                if (value[temp[j]] > value[temp[j + 1]]) {
+                    Utils::swap(&temp[j], &temp[j + 1]);
+                    swapped = true;
                 }
+                if (!swapped) { break; }
             }
         }
+        return temp[1];
+    }
+
+    void quick(int *value, int low, int high)
+    {
+        // 分割されたデータ列の値が1個の場合、それを返す。
+        if (low >= high) { return; }
+
+        int left = low + 1;
+        int right = high;
+        int pivot = med3(value, low, high);
 
         // 中央値をデータ列の一番左に移動し、その値をpivotとする
-        if (value[tempIndex[1]] != value[leftIndex]) {
-            Utils::Swap(&value[tempIndex[1]], &value[leftIndex]);
-            swapCount++;
+        if (pivot != low) {
+            Utils::swap(&value[pivot], &value[low]);
+            pivot = low;
         }
 
         // 並び替え処理
@@ -48,34 +56,30 @@ namespace SortAlgorithms
 
             // 見つけた値同士で交換する。
             if (left < right) {
-                Utils::Swap(&value[left], &value[right]);
-                swapCount++;
+                Utils::swap(&value[left], &value[right]);
             }
         } while (left < right);
 
         // pivotを列の中央に移動する
         if (value[right] < value[pivot]) {
-            Utils::Swap(&value[right], &value[pivot]);
-            swapCount++;
+            Utils::swap(&value[right], &value[pivot]);
         }
 
         // pivotより小さい数字を集めた範囲でソート
-        Quick(value, leftIndex, right - 1);
+        quick(value, low, right - 1);
 
         // pivotより大きい数字を集めた範囲でソート
-        Quick(value, left, rightIndex);
+        quick(value, left, high);
 
         // 結果表示
-        Show::Array(value, leftIndex, rightIndex + 1);
+        Show::array(value, low, high + 1);
     }
 
     // クイックソート(オーダー = O(NlogN))
-    void Sort::QuickSort(int *value, int length)
+    void Sort::quickSort(int *value, int length)
     {
-        swapCount = 0;
         arraySize = length;
         std::cout << "Run Quick Sort" << std::endl;
-        Quick(value, 0, length - 1);
-        Show::SwapCount(swapCount);
+        quick(value, 0, length - 1);
     }
 }

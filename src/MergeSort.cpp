@@ -45,11 +45,11 @@ namespace SortAlgorithms
         delete temp;
 
         // 結果表示
-        Show::Array(value, length);
+        Show::array(value, length);
     }
 
     // マージソート(オーダー = O(NlogN))
-    void Sort::MergeSort(int *value, int length)
+    void Sort::mergeSort(int *value, int length)
     {
         std::cout << "Run Merge Sort" << std::endl;
         Merge(value, length);

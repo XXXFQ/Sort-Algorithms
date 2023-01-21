@@ -6,8 +6,8 @@ namespace SortAlgorithms
     class Utils
     {
     public:
-        static int Random(int, int);
-        static void Swap(int *, int *);
+        static int random(int, int);
+        static void swap(int *, int *);
     };
 }
 

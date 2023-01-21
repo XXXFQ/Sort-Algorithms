@@ -9,14 +9,14 @@ namespace SortAlgorithms
     std::default_random_engine gen(seed);
 
     // 指定された範囲のランダムな数値を生成
-    int Utils::Random(int low, int high)
+    int Utils::random(int low, int high)
     {
         std::uniform_int_distribution<> dist(low, high);
         return dist(gen);
     }
 
     // 値の交換
-    void Utils::Swap(int *x, int *y)
+    void Utils::swap(int *x, int *y)
     {
         int swap = *x;
         *x = *y;

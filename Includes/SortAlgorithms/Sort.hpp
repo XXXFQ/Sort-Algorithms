@@ -11,14 +11,14 @@ namespace SortAlgorithms
     class Sort
     {
     public:
-        static void SelectionSort(int *, int);
-        static void BubbleSort(int *, int);
-        static void InsertionsSort(int *, int);
-        static void ShellSort(int *, int);
-        static void MergeSort(int *, int);
-        static void QuickSort(int *, int);
-        static void HeapSort(int *, int);
-        static void ShakerSort(int *, int);
+        static void selectionSort(int *, int);
+        static void bubbleSort(int *, int);
+        static void insertionsSort(int *, int);
+        static void shellSort(int *, int);
+        static void mergeSort(int *, int);
+        static void quickSort(int *, int);
+        static void heapSort(int *, int);
+        static void shakerSort(int *, int);
     };
 }
 

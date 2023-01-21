@@ -6,7 +6,7 @@
 namespace SortAlgorithms
 {
     // heap配列に新しく追加されたデータがあるものとして、ヒープとなるよう再構成する
-    void UpHeap(int *heap, int parent, int length)
+    void upHeap(int *heap, int parent, int length)
     {
         const int leftChild = LEFT_CHILD(parent);
         const int rightChild = RIGHT_CHILD(parent);
@@ -14,14 +14,14 @@ namespace SortAlgorithms
 
         // 親より左の子の方が大きい場合入れ替える。
         if (heap[leftChild] < heap[parent]) {
-            Utils::Swap(&heap[leftChild], &heap[parent]);
-            UpHeap(heap, leftChild, length);
+            Utils::swap(&heap[leftChild], &heap[parent]);
+            upHeap(heap, leftChild, length);
         }
 
         // 親より右の子の方が大きい場合入れ替える。
         if (heap[rightChild] < heap[parent] && rightChild < length) {
-            Utils::Swap(&heap[rightChild], &heap[parent]);
-            UpHeap(heap, rightChild, length);
+            Utils::swap(&heap[rightChild], &heap[parent]);
+            upHeap(heap, rightChild, length);
         }
     }
 
@@ -34,24 +34,24 @@ namespace SortAlgorithms
 
         // ルートを木の末端の要素と入れ替える
         if (parent == 0) {
-            Utils::Swap(&heap[length], &heap[0]);
+            Utils::swap(&heap[length], &heap[0]);
         }
 
         // 親より右の子の方が大きい場合入れ替える。
         if (heap[rightChild] < heap[parent] && rightChild < length) {
-            Utils::Swap(&heap[rightChild], &heap[parent]);
+            Utils::swap(&heap[rightChild], &heap[parent]);
             downHeap(heap, rightChild, length);
         }
 
         // 親より左の子の方が大きい場合入れ替える。
         if (heap[leftChild] < heap[parent]) {
-            Utils::Swap(&heap[leftChild], &heap[parent]);
+            Utils::swap(&heap[leftChild], &heap[parent]);
             downHeap(heap, leftChild, length);
         }
     }
 
     // ヒープソート(オーダー = O(NlogN))
-    void Sort::HeapSort(int *value, int length)
+    void Sort::heapSort(int *value, int length)
     {
         int *heap, parent = length / 2 - 1;
         int heapLength = length;
@@ -74,10 +74,10 @@ namespace SortAlgorithms
                 heap[RIGHT_CHILD(parent)] = value[++i];
             
             // heap配列がヒープとなるよう再構成
-            UpHeap(heap, parent, heapLength);
+            upHeap(heap, parent, heapLength);
         }
         value[0] = heap[0];
-        Show::Array(heap, heapLength);
+        Show::array(heap, heapLength);
 
         // ヒープからルートの削除
         for (int i = 1; i < length; i++) {
@@ -88,10 +88,10 @@ namespace SortAlgorithms
             value[i] = heap[0];
 
             // 結果表示
-            Show::Array(heap, heapLength);
+            Show::array(heap, heapLength);
         }
         value[length - 1] = heap[1];
-        Show::Array(value, length);
+        Show::array(value, length);
         delete heap;
     }
 }
