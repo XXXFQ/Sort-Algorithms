@@ -1,9 +1,10 @@
 #include <iostream>
 #include <random>
 #include <chrono>
-#include "SortAlgorithms/Utils.hpp"
 
-namespace SortAlgorithms
+#include "sort_algorithms/utils/utils.hpp"
+
+namespace sort_algorithms
 {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine gen(seed);

@@ -1,40 +1,41 @@
 #include <memory>
-#include "SortAlgorithms/Sort.hpp"
 
-namespace SortAlgorithms
+#include "sort_algorithms/sort.hpp"
+
+namespace sort_algorithms
 {
-    void Merge(int *value, int length)
+    void merge(int *value, int length)
     {
-        int i, j, leftLength, rightLength, *temp;
+        int i, j, left_length, right_length, *temp;
 
         // 分割されたデータ列の値が1個の場合、それを返す。
-        if (length <= 1) { return; }
+        if (length <= 1) return;
 
         // データ列の長さに合わせて、メモリを確保
         temp = new int[length];
 
-        leftLength = length / 2;
-        rightLength = length - leftLength;
-        Merge(value, leftLength);
-        Merge(value + leftLength, rightLength);
+        left_length = length / 2;
+        right_length = length - left_length;
+        merge(value, left_length);
+        merge(value + left_length, right_length);
         i = j = 0;
-        while (i < leftLength && j < rightLength) {
-            if (value[i] < value[leftLength + j]) {
+        while (i < left_length && j < right_length) {
+            if (value[i] < value[left_length + j]) {
                 temp[i + j] = value[i];
                 i++;
             }
             else {
-                temp[i + j] = value[leftLength + j];
+                temp[i + j] = value[left_length + j];
                 j++;
             }
         }
-        while (i < leftLength || j < rightLength) {
-            if (i < leftLength) {
+        while (i < left_length || j < right_length) {
+            if (i < left_length) {
                 temp[i + j] = value[i];
                 i++;
             }
             else {
-                temp[i + j] = value[leftLength + j];
+                temp[i + j] = value[left_length + j];
                 j++;
             }
         }
@@ -49,9 +50,9 @@ namespace SortAlgorithms
     }
 
     // マージソート(オーダー = O(NlogN))
-    void Sort::mergeSort(int *value, int length)
+    void Sort::merge_sort(int *value, int length)
     {
         std::cout << "Run Merge Sort" << std::endl;
-        Merge(value, length);
+        merge(value, length);
     }
 }

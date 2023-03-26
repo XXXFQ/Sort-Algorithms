@@ -1,8 +1,8 @@
-#include "SortAlgorithms/Sort.hpp"
+#include "sort_algorithms/sort.hpp"
 
-namespace SortAlgorithms
+namespace sort_algorithms
 {
-    int arraySize;
+    int array_size;
 
     // データ列の先頭/中央/末尾の3つの値の中央値を求める
     int med3(int *value, int low, int high)
@@ -19,7 +19,7 @@ namespace SortAlgorithms
                     Utils::swap(&temp[j], &temp[j + 1]);
                     swapped = true;
                 }
-                if (!swapped) { break; }
+                if (!swapped) break;
             }
         }
         return temp[1];
@@ -28,7 +28,7 @@ namespace SortAlgorithms
     void quick(int *value, int low, int high)
     {
         // 分割されたデータ列の値が1個の場合、それを返す。
-        if (low >= high) { return; }
+        if (low >= high) return;
 
         int left = low + 1;
         int right = high;
@@ -43,14 +43,14 @@ namespace SortAlgorithms
         // 並び替え処理
         do {
             // 右から探索し、pivotよりも大きい値を見つける
-            while (left <= right && left < arraySize) {
-        		if (value[left] > value[pivot]) { break; }
+            while (left <= right && left < array_size) {
+        		if (value[left] > value[pivot]) break;
         		left++;
         	}
 
             // 左から探索し、pivot以下の値を見つける
             while (left <= right && right >= 0) {
-        		if (value[pivot] >= value[right]) { break; }
+        		if (value[pivot] >= value[right]) break;
         		right--;
         	}
 
@@ -76,9 +76,9 @@ namespace SortAlgorithms
     }
 
     // クイックソート(オーダー = O(NlogN))
-    void Sort::quickSort(int *value, int length)
+    void Sort::quick_sort(int *value, int length)
     {
-        arraySize = length;
+        array_size = length;
         std::cout << "Run Quick Sort" << std::endl;
         quick(value, 0, length - 1);
     }

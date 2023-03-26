@@ -1,17 +1,19 @@
-#include "SortAlgorithms.hpp"
 #include <chrono>
+
+#include "sort_algorithms.hpp"
 
 int main(void)
 {
-    using namespace SortAlgorithms;
+    using namespace sort_algorithms;
     int data[54], mode;
-    const int dataSize = sizeof(data) / sizeof(int);
+    const int data_size = sizeof(data) / sizeof(int);
     std::chrono::system_clock::time_point start, end;
 
     // 整列用の乱数を生成する
-    for (int i = 0; i != dataSize; ++i)
-        data[i] = Utils::random(0, dataSize);
-    
+    for (int i = 0; i != data_size; ++i)  {
+        data[i] = Utils::random(0, data_size);
+    }
+
     std::cout << "Sort mode? ";
     std::cin >> mode;
 
@@ -20,35 +22,36 @@ int main(void)
     switch (mode) {
         case 0:
             // 選択ソート
-            Sort::selectionSort(data, dataSize);
+            Sort::selection_sort(data, data_size);
             break;
         case 1:
             // バブルソート
-            Sort::bubbleSort(data, dataSize);
+            Sort::bubble_sort(data, data_size);
             break;
         case 2:
             // 挿入ソート
-            Sort::insertionsSort(data, dataSize);
+            Sort::insertions_sort(data, data_size);
             break;
         case 3:
             // シェルソート
-            Sort::shellSort(data, dataSize);
+            Sort::shell_sort(data, data_size);
             break;
         case 4:
             // マージソート
-            Sort::mergeSort(data, dataSize);
+            Sort::merge_sort(data, data_size);
             break;
         case 5:
             // クイックソート
-            Sort::quickSort(data, dataSize);
+            Sort::quick_sort(data, data_size);
             break;
         case 6:
             // ヒープソート
-            Sort::heapSort(data, dataSize);
+            Sort::heap_sort(data, data_size);
             break;
         case 7:
             // シェーカーソート
-            Sort::shakerSort(data, dataSize);
+            Sort::shaker_sort(data, data_size);
+            break;
     }
 
     // 計測終了時間

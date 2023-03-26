@@ -1,9 +1,9 @@
-#include "SortAlgorithms/Sort.hpp"
+#include "sort_algorithms/sort.hpp"
 
-namespace SortAlgorithms
+namespace sort_algorithms
 {
     // 選択ソート(オーダー = O(N^2))
-    void Sort::selectionSort(int *value, int length)
+    void Sort::selection_sort(int *value, int length)
     {
         std::cout << "Run Selection Sort" << std::endl;
         for (int i = 0; i < length - 1; i++) {
@@ -17,7 +17,7 @@ namespace SortAlgorithms
     }
 
     // バブルソート(オーダー = O(N^2))
-    void Sort::bubbleSort(int *value, int length)
+    void Sort::bubble_sort(int *value, int length)
     {
         bool swapped;
 
@@ -30,13 +30,13 @@ namespace SortAlgorithms
                     swapped = true;
                 }
             }
-            if (!swapped) { break; }
+            if (!swapped) break;
             Show::array(value, length);
         }
     }
 
     // 挿入ソート(オーダー = O(N^2))
-    void Sort::insertionsSort(int *value, int length)
+    void Sort::insertions_sort(int *value, int length)
     {
         bool swapped;
 
@@ -48,17 +48,17 @@ namespace SortAlgorithms
                     Utils::swap(&value[j], &value[j + 1]);
                     swapped = true;
                 }
-                if (!swapped) { break; }
+                if (!swapped) break;
             }
             Show::array(value, length);
         }
     }
 
     // シェルソート(オーダー = O(N^2))
-    void Sort::shellSort(int *value, int length)
+    void Sort::shell_sort(int *value, int length)
     {
         bool swapped;
-        int h, groupNumber;
+        int h, group_number;
 
         std::cout << "Run Shell Sort" << std::endl;
 
@@ -70,16 +70,16 @@ namespace SortAlgorithms
             // 間隔をあけて取り出したデータ列に挿入ソートを適用
             for (int i = h - 1; i < length - h; i += h) {
                 swapped = false;
-                for (int j = i, groupNumber = 1; j >= 0; j--, groupNumber++) {
+                for (int j = i, group_number = 1; j >= 0; j--, group_number++) {
                     if (value[j] > value[j + h]) {
                         Utils::swap(&value[j], &value[j + h]);
                         swapped = true;
                     }
                     // 各グループごとの比較が、それぞれ一回ずつ行われた場合
-                    if (groupNumber == h) {
+                    if (group_number == h) {
                         // 交換が行われなかった場合、ループを抜ける
-                        if (!swapped) { break; }
-                        groupNumber = 0;
+                        if (!swapped) break;
+                        group_number = 0;
                         swapped = false;
                     }
                 }
@@ -92,10 +92,10 @@ namespace SortAlgorithms
     }
 
     // シェーカーソート
-    void Sort::shakerSort(int *value, int length)
+    void Sort::shaker_sort(int *value, int length)
     {
-        int topIndex = 0;
-        int endIndex = length - 1;
+        int top_index = 0;
+        int end_index = length - 1;
         bool swapped;
 
         std::cout << "Run Shaker Sort" << std::endl;
@@ -103,7 +103,7 @@ namespace SortAlgorithms
             swapped = false;
 
             // 順方向のスキャン
-            for (int i = topIndex; i < endIndex; i++) {
+            for (int i = top_index; i < end_index; i++) {
                 if (value[i] > value[i + 1]) {
                     Utils::swap(&value[i], &value[i + 1]);
                     swapped = true;
@@ -111,18 +111,19 @@ namespace SortAlgorithms
             }
 
             // 逆方向のスキャン
-            for (int i = endIndex - 2; i >= topIndex; i--) {
+            for (int i = end_index - 2; i >= top_index; i--) {
                 if (value[i] > value[i + 1]) {
                     Utils::swap(&value[i], &value[i + 1]);
                     swapped = true;
                 }
             }
-            if (swapped)
+            if (swapped) {
                 Show::array(value, length);
-
+            }
+            
             // スキャン範囲を狭める
-            topIndex++;
-            endIndex--;
-        } while (topIndex < endIndex && swapped);
+            top_index++;
+            end_index--;
+        } while (top_index < end_index && swapped);
     }
 }

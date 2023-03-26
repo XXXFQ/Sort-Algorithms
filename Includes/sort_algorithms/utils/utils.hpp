@@ -1,7 +1,7 @@
-#ifndef   UTILS_HPP
-#define   UTILS_HPP
+#ifndef   SORT_ALGORITHMS_UTILS_UTILS_HPP
+#define   SORT_ALGORITHMS_UTILS_UTILS_HPP
 
-namespace SortAlgorithms
+namespace sort_algorithms
 {
     class Utils
     {

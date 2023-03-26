@@ -1,9 +1,10 @@
 #include <iostream>
 #include <random>
 #include <chrono>
-#include "SortAlgorithms/Show.hpp"
 
-namespace SortAlgorithms
+#include "sort_algorithms/utils/show.hpp"
+
+namespace sort_algorithms
 {
     // 配列のデータ表示
     void Show::array(int *array, int length)
@@ -15,9 +16,9 @@ namespace SortAlgorithms
     }
 
     // 配列のデータ表示(開始値を設定できる)
-    void Show::array(int *array, int Start, int length)
+    void Show::array(int *array, int start, int length)
     {
-        for (int i = Start; i < length; i++) {
+        for (int i = start; i < length; i++) {
             std::cout << array[i] << " ";
         }
         std::cout << std::endl;
