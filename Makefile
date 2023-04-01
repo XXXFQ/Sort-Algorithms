@@ -20,7 +20,7 @@ CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 
 export LD	:=	$(CC)
-OFILES		:= $(addprefix $(BUILDDIR)/,$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o))
+OFILES		:=	$(addprefix $(BUILDDIR)/,$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o))
 
 .PHONY: $(BUILDDIR) clean all
 
