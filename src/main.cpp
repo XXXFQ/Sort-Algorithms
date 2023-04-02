@@ -6,7 +6,7 @@ int main(void)
 {
     using namespace sort_algorithms;
     int data[54], mode;
-    const int data_size = sizeof(data) / sizeof(int);
+    size_t data_size = sizeof(data) / sizeof(int);
     std::chrono::system_clock::time_point start, end;
 
     // 整列用の乱数を生成する

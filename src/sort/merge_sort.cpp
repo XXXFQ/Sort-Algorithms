@@ -19,26 +19,27 @@ namespace sort_algorithms
         merge(value, left_length);
         merge(value + left_length, right_length);
         i = j = 0;
+        
         while (i < left_length && j < right_length) {
             if (value[i] < value[left_length + j]) {
                 temp[i + j] = value[i];
                 i++;
-            }
-            else {
+            } else {
                 temp[i + j] = value[left_length + j];
                 j++;
             }
         }
+
         while (i < left_length || j < right_length) {
             if (i < left_length) {
                 temp[i + j] = value[i];
                 i++;
-            }
-            else {
+            } else {
                 temp[i + j] = value[left_length + j];
                 j++;
             }
         }
+
         // tempの内容をvalue配列にコピー
         memcpy(value, temp, sizeof(int) * length);
 
